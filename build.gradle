@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['.']
+      exclude 'build'
+      exclude 'bin'
+      exclude '.gradle'
+    }
+  }
+}
+
+apply plugin: 'checkstyle'
+
+
+checkstyle {
+  toolVersion = '8.11'
+  configFile = file('checkstyle.xml')
+}
+
+task(runStrategy, dependsOn: 'classes', type: JavaExec) {
+    main = 'strategy.ListDriver'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
