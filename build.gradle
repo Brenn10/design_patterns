@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.github.spotbugs" version "4.7.3"
 }
 
 repositories {
@@ -9,7 +10,7 @@ repositories {
 sourceSets {
   main {
     java {
-      srcDirs = ['.']
+      srcDirs = ['src']
       exclude 'build'
       exclude 'bin'
       exclude '.gradle'
@@ -17,16 +18,37 @@ sourceSets {
   }
 }
 
+// Configure spotbugs
+
+dependencies {
+  spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+  spotbugs 'com.github.spotbugs:spotbugs:4.0.0'
+}
+
+spotbugsMain {
+    ignoreFailures = false
+    showStackTraces = false
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}
+
+//Configure checkstyle
+
 apply plugin: 'checkstyle'
 
-
 checkstyle {
+  ignoreFailures = false
   toolVersion = '8.11'
   configFile = file('checkstyle.xml')
 }
 
-task(runStrategy, dependsOn: 'classes', type: JavaExec) {
-    main = 'strategy.ListDriver'
+task(runStrategy, dependsOn: ['javadoc', 'build'], type: JavaExec) {
+    mainClass = 'strategy.ListDriver'
     classpath = sourceSets.main.runtimeClasspath
 }
 
