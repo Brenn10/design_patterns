@@ -1,12 +1,12 @@
 package observer;
 
 /**
- * Runs our Best Seller Book Program
+ * Runs our Best Seller Book Program.
  */
 public class BookDriver {
     
     /**
-     * Creates the Best Seller, and the Store and Client
+     * Creates the Best Seller, and the Store and Client.
      * Then displays the top 5 best sellers, and the 
      * Clients wishlist
      */

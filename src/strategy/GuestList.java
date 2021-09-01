@@ -67,6 +67,6 @@ public class GuestList {
      * @return the current guest list.
      */
     public ArrayList<String> getList() {
-        return people;
+        return new ArrayList<String>(people);
     }
 }
