@@ -32,7 +32,6 @@ spotbugsMain {
         html {
             enabled = true
             destination = file("$buildDir/reports/spotbugs/spotbugs.html")
-            stylesheet = 'fancy-hist.xsl'
         }
     }
 }
@@ -49,6 +48,11 @@ checkstyle {
 
 task(runStrategy, dependsOn: ['javadoc', 'build'], type: JavaExec) {
     mainClass = 'strategy.ListDriver'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task(runObserver, dependsOn: ['javadoc', 'build'], type: JavaExec) {
+    mainClass = 'observer.BookDriver'
     classpath = sourceSets.main.runtimeClasspath
 }
 
