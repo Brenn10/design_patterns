@@ -7,9 +7,9 @@ name: checkGradle
 # events but only for the master branch
 on:
   push:
-    branches: [ master, main ]
+    branches: "*"
   pull_request:
-    branches: [ master, main ]
+    branches: "*"
 jobs:
   gradle:
     runs-on: ubuntu-latest
