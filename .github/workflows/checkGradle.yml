@@ -1,0 +1,43 @@
+# .github/workflows/checkGradle.yml
+# GitHub Actions documentation
+# => https://docs.github.com/en/actions
+name: checkGradle
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+jobs:
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      # Execute Gradle commands in GitHub Actions workflows
+      # => https://github.com/marketplace/actions/gradle-command
+      - uses: gradle/gradle-build-action@v1
+        with:
+          gradle-version: 7.2
+          arguments: build
+          distributions-cache-enabled: true
+          dependencies-cache-enabled: true
+          configuration-cache-enabled: true
+        id: gradle
+      - name: "Comment build scan url"
+        uses: actions/github-script@v3
+        if: github.event_name == 'pull_request' && failure()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
+            })
