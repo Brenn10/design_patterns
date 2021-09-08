@@ -12,13 +12,12 @@ public class Nose extends CharacterDecorator {
      */
     public Nose(Character character) {
         super(character);
-        customize();
     }
     
     /**
      * Customizes the nose.
      */
     public void customize() {
-        character.sections.set(4, " |   >    | ");
+        sections.set(4, " |   >    | ");
     }
 }

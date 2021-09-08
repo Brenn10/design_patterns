@@ -12,13 +12,12 @@ public class Eyes extends CharacterDecorator {
      */
     public Eyes(Character character) {
         super(character);
-        customize();
     }
     
     /**
      * Adds eyes to the character.
      */
     public void customize() {
-        character.sections.set(3, " |  o  o  | ");
+        sections.set(3, " |  o  o  | ");
     }
 }

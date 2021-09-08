@@ -9,17 +9,18 @@ public abstract class CharacterDecorator extends Character {
 
     /**
      * Creates a CharacterDecorator object.
+     * I don't know why we save character in the constructor, but it's there.
+     * Seems like it is unused.
      * @param character the Character object to be decorated.
      */
     public CharacterDecorator(Character character) {
         this.character = character;
         this.sections.addAll(character.sections);
+        customize();
     }
 
     /**
      * Customize the character.
-     * I don't understand why this is needed in the public since customize should be a local helper
-     * method.
      */
     public abstract void customize();
 }

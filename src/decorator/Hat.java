@@ -12,13 +12,12 @@ public class Hat extends CharacterDecorator {
      */
     public Hat(Character character) {
         super(character);
-        customize();
     }
     
     /**
      * Adds a hat to the character.
      */
     public void customize() {
-        character.sections.set(1, " __|____|____");
+        sections.set(1, " __|____|____");
     }
 }

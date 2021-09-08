@@ -12,13 +12,12 @@ public class Mouth extends CharacterDecorator {
      */
     public Mouth(Character character) {
         super(character);
-        customize();
     }
     
     /**
      * Customizes the mouth.
      */
     public void customize() {
-        character.sections.set(5, "  \\ ---- / ");
+        sections.set(5, "  \\ ---- / ");
     }
 }
