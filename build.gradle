@@ -57,6 +57,11 @@ task(runObserver, dependsOn: ['javadoc', 'build'], type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 }
 
+task(runDecorator, dependsOn: ['javadoc', 'build'], type: JavaExec) {
+    mainClass = 'decorator.PotatoeDriver'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 tasks.withType(Checkstyle) {
     reports {
         xml.required = false
