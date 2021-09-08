@@ -13,7 +13,7 @@ public abstract class CharacterDecorator extends Character {
      */
     public CharacterDecorator(Character character) {
         this.character = character;
-        this.sections = character.sections;
+        this.sections.addAll(character.sections);
     }
 
     /**
