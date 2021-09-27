@@ -72,6 +72,12 @@ task(runIterator, dependsOn: ['javadoc', 'build'], type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 }
 
+task(runSingleton, dependsOn: ['javadoc', 'build'], type: JavaExec) {
+    mainClass = 'singleton.GameDriver'
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
 tasks.withType(Checkstyle) {
     reports {
         xml.required = false
